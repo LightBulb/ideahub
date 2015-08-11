@@ -10,7 +10,7 @@
   right: 0;
   top: 0;
   height: 49px;
-  z-index: 99999;
+  z-index: 9999;
   transition: top 0.3s ease;
 }
 .wrapper.sticky-enabled .header.header-logged-in.nav-up {
@@ -25,4 +25,7 @@
 }
 .tweetbox .form-actions {
   margin-top: 10px;
+}
+body .octotree_sidebar {
+  z-index: 10000;
 }
