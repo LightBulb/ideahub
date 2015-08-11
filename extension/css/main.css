@@ -1,0 +1,10 @@
+.tweetbox .tweetbox-main {
+  padding: 10px;
+}
+.tweetbox textarea {
+  resize: none;
+  width: 100%;
+}
+.tweetbox .form-actions {
+  margin-top: 10px;
+}

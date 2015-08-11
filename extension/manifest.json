@@ -1,0 +1,29 @@
+{
+   "description": "GitHub meets Ideas",
+   "icons": {
+      "128": "img/icon-128.png",
+      "16": "img/icon-16.png",
+      "48": "img/icon-48.png"
+   },
+   "manifest_version": 2,
+   "name": "IdeaHub",
+   "offline_enabled": true,
+   "version": "0.10",
+   "permissions": [
+    "https://github.com/*",
+    "storage"
+  ],
+   "content_scripts": [
+      {
+          "matches": ["https://github.com/*"],
+          "js": [
+            "js/jquery.js",
+            "js/react.js",
+            "js/app.js"
+          ],
+          "css": [
+            "css/main.css"
+          ]
+      }
+  ]
+}
