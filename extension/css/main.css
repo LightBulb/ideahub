@@ -11,10 +11,11 @@
   top: 0;
   height: 49px;
   z-index: 9999;
-  transition: top 0.3s ease;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
 }
 .wrapper.sticky-enabled .header.header-logged-in.nav-up {
-  top: -50px;
+  transform: translateY(-50px);
 }
 .tweetbox .tweetbox-main {
   padding: 10px;
