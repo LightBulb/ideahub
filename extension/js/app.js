@@ -1,5 +1,5 @@
 (function(W, D){
-  var div, h1, h2, h3, p, span, textarea, button, App;
+  var div, h1, h2, h3, p, span, textarea, button, dom, App;
   div = React.createFactory('div');
   h1 = React.createFactory('h1');
   h2 = React.createFactory('h2');
@@ -8,6 +8,7 @@
   span = React.createFactory('span');
   textarea = React.createFactory('textarea');
   button = React.createFactory('button');
+  dom = React.findDOMNode;
   App = (function(){
     App.displayName = 'App';
     var prototype = App.prototype, constructor = App;
@@ -17,17 +18,33 @@
       $('#jobs_info_tip').remove();
       $('.dashboard-sidebar').prepend('<div class="tweetbox"></div>');
       TweetBox = React.createClass({
+        getInitialState: function(){
+          return {
+            tweetboxContent: ''
+          };
+        },
+        handleChange: function(){
+          var el, content;
+          el = this.refs.tweetboxContent;
+          content = dom(el).value;
+          return this.setState({
+            tweetboxContent: content
+          });
+        },
         render: function(){
           return div({
             className: 'boxed-group'
           }, h3(null, 'Any dev ideas?'), div({
             className: 'boxed-group-inner tweetbox-main'
           }, textarea({
-            className: 'input-contrast'
+            className: 'input-contrast',
+            onChange: this.handleChange,
+            ref: 'tweetboxContent'
           }), div({
             className: 'form-actions'
           }, button({
-            className: 'btn btn-primary btn-sm'
+            className: 'btn btn-primary btn-sm',
+            disabled: this.state.tweetboxContent.length > 0 ? '' : 'disabled'
           }, 'Send'))));
         }
       });
