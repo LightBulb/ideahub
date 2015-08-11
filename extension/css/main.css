@@ -1,6 +1,21 @@
 .github-jobs-promotion {
   display: none;
 }
+.wrapper.sticky-enabled {
+  padding-top: 49px;
+}
+.wrapper.sticky-enabled .header.header-logged-in {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 49px;
+  z-index: 99999;
+  transition: top 0.3s ease;
+}
+.wrapper.sticky-enabled .header.header-logged-in.nav-up {
+  top: -50px;
+}
 .tweetbox .tweetbox-main {
   padding: 10px;
 }
