@@ -9,10 +9,19 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "browserify-livescript": "^0.2.3",
     "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-livescript": "^2.4.0",
     "gulp-stylus": "^2.0.6",
-    "livescript": "^1.4.0"
+    "gulp-util": "^3.0.6",
+    "jquery": "^2.1.4",
+    "liveify": "^3.0.0",
+    "livescript": "^1.4.0",
+    "livescript-loader": "^0.1.5",
+    "react": "^0.13.3",
+    "store": "^1.3.17",
+    "webpack": "^1.11.0"
   }
 }

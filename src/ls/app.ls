@@ -1,3 +1,7 @@
+React = require \react
+$ = require \jquery
+store = require \store
+
 ((W, D) ->
 
   # define factory
@@ -54,7 +58,12 @@
     @init = ->
 
       ideahub-access-token = store.get \ideahub-access-token
+      #github-token-from-url = 
+
       TweetboxOverride = if ideahub-access-token then '' else React.create-class do
+        handle-guest-click: ->
+          # $('.tweetbox-overlay').remove!
+          alert 'Guest mode not yet available!'
         render: ->
           div do
             class-name: 'tweetbox-overlay'
@@ -72,6 +81,7 @@
               a do
                 class-name: 'btn btn-sm'
                 href: '#'
+                on-click: @handle-guest-click
                 span do
                   class-name: 'octicon octicon-gist-secret'
                 ' Guest'
@@ -97,14 +107,14 @@
           a do
             href: '#'
             class-name: 'header-nav-link tooltipped tooltipped-s'
-            onClick: @handleClick
+            on-click: @handleClick
             'aria-label': 'Compose some idea'
             span do
               class-name: 'octicon octicon-pencil'
 
 
       TweetBox = React.create-class do
-        getInitialState: ->
+        get-initial-state: ->
           do
             tweetbox-content: ''
         handle-change: ->
@@ -115,13 +125,13 @@
         render: ->
           div do
             class-name: 'boxed-group tweetbox-boxed'
-            $el(TweetboxOverride)
+            $el TweetboxOverride
             h3 null, 'Any dev ideas?'
             div do
               class-name: 'boxed-group-inner tweetbox-main'
               textarea do
                 class-name: 'input-contrast tweetboxContent'
-                onChange: @handle-change
+                on-change: @handle-change
                 ref: 'tweetboxContent'
               div do
                 class-name: \form-actions

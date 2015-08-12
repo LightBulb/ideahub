@@ -17,10 +17,7 @@
       {
           "matches": ["https://github.com/*"],
           "js": [
-            "js/jquery.js",
-            "js/react.js",
-            "js/store.js",
-            "js/app.js"
+            "js/ideahub.js"
           ],
           "css": [
             "css/main.css"

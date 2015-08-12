@@ -1,6 +1,8 @@
 gulp = require \gulp
-live = require \gulp-livescript
+webpack = require \webpack
 stylus = require \gulp-stylus
+gutil = require \gulp-util
+
 
 paths = 
   ls: \./src/ls/app.ls
@@ -10,10 +12,19 @@ paths =
   stylAll: \./src/styl/*.styl
   css: \./extension/css
 
-gulp.task \js, ->
-  gulp.src paths.ls
-    .pipe live bare: true
-    .pipe gulp.dest paths.js
+webpack-config = require(\./webpack.config)
+
+gulp.task \webpack, (cb)->
+  prod-config = Object.create webpack-config
+  prod-config.plugins = prod-config.plugins.concat new webpack.optimize.UglifyJsPlugin()
+  webpack prod-config, (err, stats) ->
+     gutil.log '[webpack]', stats.toString!
+     cb!
+
+gulp.task \webpack-dev, (cb)->
+  webpack webpack-config, (err, stats) ->
+     gutil.log '[webpack]', stats.toString!
+     cb!
 
 gulp.task \styl, ->
   gulp.src paths.styl
@@ -21,9 +32,13 @@ gulp.task \styl, ->
     .pipe gulp.dest paths.css
 
 gulp.task \watch, ->
-  gulp.watch paths.lsAll, <[js]>
+  gulp.watch paths.lsAll, <[webpack-dev]>
   gulp.watch paths.stylAll, <[styl]>
 
-gulp.task \build, <[js styl]>
+gulp.task \build, <[webpack styl]>
+
+gulp.task \build-dev, <[webpack-dev styl]>
 
 gulp.task \default, <[build watch]>
+
+gulp.task \dev, <[build-dev watch]>
