@@ -1,3 +1,7 @@
+# app
+extension/js/app.js
+extension/css/main.css
+
 # Logs
 logs
 *.log
