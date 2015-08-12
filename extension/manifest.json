@@ -19,6 +19,7 @@
           "js": [
             "js/jquery.js",
             "js/react.js",
+            "js/store.js",
             "js/app.js"
           ],
           "css": [

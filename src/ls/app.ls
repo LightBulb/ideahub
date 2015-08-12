@@ -13,6 +13,7 @@
   button = React.create-factory \button
 
   dom = React.findDOMNode
+  $el = React.create-element
 
   sticky = ->
     $('.wrapper').add-class 'sticky-enabled'
@@ -51,6 +52,30 @@
 
   class App
     @init = ->
+
+      ideahub-access-token = store.get \ideahub-access-token
+      TweetboxOverride = if ideahub-access-token then '' else React.create-class do
+        render: ->
+          div do
+            class-name: 'tweetbox-overlay'
+            div do
+              class-name: 'tweetbox-override'
+            div do
+              class-name: 'tweetbox-guest'
+              a do
+                class-name: 'btn btn-sm'
+                href: 'https://ideahub.avosapps.com/api/github_login'
+                span do
+                  class-name: 'octicon octicon-octoface'
+                ' Sign in with GitHub'
+              ' | '
+              a do
+                class-name: 'btn btn-sm'
+                href: '#'
+                span do
+                  class-name: 'octicon octicon-gist-secret'
+                ' Guest'
+
       
       $('.github-jobs-promotion').remove!
       $('#jobs_info_tip').remove!
@@ -89,7 +114,8 @@
             tweetbox-content: content 
         render: ->
           div do
-            class-name: \boxed-group
+            class-name: 'boxed-group tweetbox-boxed'
+            $el(TweetboxOverride)
             h3 null, 'Any dev ideas?'
             div do
               class-name: 'boxed-group-inner tweetbox-main'
@@ -105,9 +131,9 @@
                   \Send
 
 
-      React.render React.create-element(Pen), D.querySelector('.ideahub-pen')
-      React.render React.create-element(IdeaNav), D.querySelector('.ideahub-idea-nav')
-      React.render React.create-element(TweetBox), D.querySelector('.tweetbox')
+      React.render $el(Pen), D.querySelector('.ideahub-pen')
+      React.render $el(IdeaNav), D.querySelector('.ideahub-idea-nav')
+      React.render $el(TweetBox), D.querySelector('.tweetbox')
       # end init
 
 

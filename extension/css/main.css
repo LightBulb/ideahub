@@ -17,6 +17,9 @@
 .wrapper.sticky-enabled .header.header-logged-in.nav-up {
   transform: translateY(-50px);
 }
+.tweetbox .tweetbox-boxed {
+  position: relative;
+}
 .tweetbox .tweetbox-main {
   padding: 10px;
 }
@@ -26,6 +29,25 @@
 }
 .tweetbox .form-actions {
   margin-top: 10px;
+}
+.tweetbox .tweetbox-override,
+.tweetbox .tweetbox-guest {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  opacity: 0.7;
+}
+.tweetbox .tweetbox-guest {
+  opacity: 1;
+  background-color: transparent;
+  text-align: center;
+  padding-top: 50px;
+}
+.tweetbox .tweetbox-guest a:hover {
+  text-decoration: none;
 }
 body .octotree_sidebar {
   z-index: 10000;

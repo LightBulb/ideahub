@@ -1,5 +1,5 @@
 (function(W, D){
-  var div, h1, h2, h3, p, a, li, span, textarea, button, dom, sticky, App;
+  var div, h1, h2, h3, p, a, li, span, textarea, button, dom, $el, sticky, App;
   div = React.createFactory('div');
   h1 = React.createFactory('h1');
   h2 = React.createFactory('h2');
@@ -11,6 +11,7 @@
   textarea = React.createFactory('textarea');
   button = React.createFactory('button');
   dom = React.findDOMNode;
+  $el = React.createElement;
   sticky = function(){
     var self, header, hasScrolled;
     $('.wrapper').addClass('sticky-enabled');
@@ -48,7 +49,31 @@
     App.displayName = 'App';
     var prototype = App.prototype, constructor = App;
     App.init = function(){
-      var IdeaNav, Pen, TweetBox;
+      var ideahubAccessToken, TweetboxOverride, IdeaNav, Pen, TweetBox;
+      ideahubAccessToken = store.get('ideahub-access-token');
+      TweetboxOverride = ideahubAccessToken
+        ? ''
+        : React.createClass({
+          render: function(){
+            return div({
+              className: 'tweetbox-overlay'
+            }, div({
+              className: 'tweetbox-override'
+            }), div({
+              className: 'tweetbox-guest'
+            }, a({
+              className: 'btn btn-sm',
+              href: 'https://ideahub.avosapps.com/api/github_login'
+            }, span({
+              className: 'octicon octicon-octoface'
+            }), ' Sign in with GitHub'), ' | ', a({
+              className: 'btn btn-sm',
+              href: '#'
+            }, span({
+              className: 'octicon octicon-gist-secret'
+            }), ' Guest')));
+          }
+        });
       $('.github-jobs-promotion').remove();
       $('#jobs_info_tip').remove();
       $('.dashboard-sidebar').prepend('<div class="tweetbox"></div>');
@@ -95,8 +120,8 @@
         },
         render: function(){
           return div({
-            className: 'boxed-group'
-          }, h3(null, 'Any dev ideas?'), div({
+            className: 'boxed-group tweetbox-boxed'
+          }, $el(TweetboxOverride), h3(null, 'Any dev ideas?'), div({
             className: 'boxed-group-inner tweetbox-main'
           }, textarea({
             className: 'input-contrast tweetboxContent',
@@ -110,9 +135,9 @@
           }, 'Send'))));
         }
       });
-      React.render(React.createElement(Pen), D.querySelector('.ideahub-pen'));
-      React.render(React.createElement(IdeaNav), D.querySelector('.ideahub-idea-nav'));
-      return React.render(React.createElement(TweetBox), D.querySelector('.tweetbox'));
+      React.render($el(Pen), D.querySelector('.ideahub-pen'));
+      React.render($el(IdeaNav), D.querySelector('.ideahub-idea-nav'));
+      return React.render($el(TweetBox), D.querySelector('.tweetbox'));
     };
     function App(){}
     return App;

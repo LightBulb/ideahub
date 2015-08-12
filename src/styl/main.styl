@@ -17,6 +17,8 @@
       transform translateY(-50px)
 
 .tweetbox
+  .tweetbox-boxed
+    position relative
   .tweetbox-main 
     padding 10px
   textarea
@@ -24,6 +26,22 @@
     width 100%
   .form-actions
     margin-top 10px
+  .tweetbox-override,.tweetbox-guest
+    position absolute
+    top 0
+    bottom 0
+    left 0 
+    right 0
+    background-color white
+    opacity .7
+  .tweetbox-guest
+    opacity 1
+    background-color transparent
+    text-align center
+    padding-top 50px
+    a
+      &:hover
+        text-decoration none
     
 // fix octotree
 body
