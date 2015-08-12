@@ -1,6 +1,7 @@
 React = require \react
 $ = require \jquery
 store = require \store
+qr = require \./qr
 
 ((W, D) ->
 
@@ -57,14 +58,21 @@ store = require \store
   class App
     @init = ->
 
-      ideahub-access-token = store.get \ideahub-access-token
-      #github-token-from-url = 
+      ideahub-github-token = store.get \ideahub-github-token
+      github-token-from-url = qr.query().ideahub_github
+      if github-token-from-url
+        store.set('ideahub-github-token', github-token-from-url)
+        $.getJSON 'https://api.github.com/users/aprilorange?access_token=' + github-token-from-url, (data) ->
+          store.set 'ideahub-user', data
+          $('.tweetbox-overlay').remove!
+          # todo: dealing with userdata, reg or login, add animation when remove the layer like fading out
 
-      TweetboxOverride = if ideahub-access-token then '' else React.create-class do
+      TweetboxOverride = React.create-class do
         handle-guest-click: ->
           # $('.tweetbox-overlay').remove!
           alert 'Guest mode not yet available!'
         render: ->
+          return div(null) if ideahub-github-token
           div do
             class-name: 'tweetbox-overlay'
             div do
@@ -117,11 +125,13 @@ store = require \store
         get-initial-state: ->
           do
             tweetbox-content: ''
+            remains: 400
         handle-change: ->
           el = @refs.tweetbox-content
           content = dom(el).value
           @setState do
             tweetbox-content: content 
+            remains: 400 - content.length
         render: ->
           div do
             class-name: 'boxed-group tweetbox-boxed'
@@ -135,10 +145,15 @@ store = require \store
                 ref: 'tweetboxContent'
               div do
                 class-name: \form-actions
-                button do
-                  class-name: 'btn btn-primary btn-sm'
-                  disabled: if @state.tweetbox-content.length > 0 then '' else 'disabled'
-                  \Send
+                div do
+                  class-name: \right
+                  span do
+                    class-name: \remains-count
+                    @state.remains
+                  button do
+                    class-name: 'btn btn-primary btn-sm'
+                    disabled: if @state.tweetbox-content.length > 0 then '' else 'disabled'
+                    \Send
 
 
       React.render $el(Pen), D.querySelector('.ideahub-pen')

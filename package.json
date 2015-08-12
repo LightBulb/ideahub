@@ -9,11 +9,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "browserify-livescript": "^0.2.3",
     "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-livescript": "^2.4.0",
     "gulp-stylus": "^2.0.6",
     "gulp-util": "^3.0.6",
     "jquery": "^2.1.4",

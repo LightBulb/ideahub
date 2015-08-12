@@ -1,5 +1,5 @@
 {
-   "description": "GitHub meets Ideas",
+   "description": "when GitHub meets ideas",
    "icons": {
       "128": "img/icon-128.png",
       "16": "img/icon-16.png",
@@ -8,7 +8,7 @@
    "manifest_version": 2,
    "name": "IdeaHub",
    "offline_enabled": true,
-   "version": "0.10",
+   "version": "0.1.0",
    "permissions": [
     "https://github.com/*",
     "storage"
