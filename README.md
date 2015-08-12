@@ -2,6 +2,11 @@
 
 Socialize GitHub then you can really code better, together (fake) 
 
+# Dev
+
+Check out a new branch and add features there, name the branch with what you would do to it, use gulp to build and watch.
+Then why livescript? for I'm a newbie on it, trying to learn more.
+
 ## TODO
 
 - [x] TweetBox layout
